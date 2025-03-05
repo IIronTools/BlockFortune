@@ -5,3 +5,7 @@ api-version: '1.21'
 authors: [ Iirontools ]
 description: Plugin do testowania
 website: dc.dotmc.pl
+commands:
+  fortune:
+    description: "Komendy do fortuny na bloki"
+    usage: "/fortune <reload>"

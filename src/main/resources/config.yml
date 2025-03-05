@@ -1,0 +1,20 @@
+#=======================================================================================================================
+
+# WERSJA: 1.0.0
+# AUTOR: IIRONTOOLS https://github.com/IIronTools
+
+#=======================================================================================================================
+
+#JAKIE BLOKI MAJĄ BYĆ MNOŻONE
+#PEŁNA LISTA DOSTĘPNYCH BLOKÓW ZNAJDUJE SIĘ NA https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+fortune-blocks:
+  - STONE
+  - GRAVEL
+  - SAND
+#=======================================================================================================================
+
+#MNOŻNIK WYPADANYCH PRZEDMIOTÓW
+# UWAGA! NALEŻY WPISYWAĆ TYLKO LICZBY CAŁKOWITE DODATNIE
+fortune-multiplier: 1
+
+#=======================================================================================================================
