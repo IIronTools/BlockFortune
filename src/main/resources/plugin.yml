@@ -1,0 +1,7 @@
+name: BlockFortune
+version: '1.0'
+main: me.iirontools.blockFortune.BlockFortune
+api-version: '1.21'
+authors: [ Iirontools ]
+description: Plugin do testowania
+website: dc.dotmc.pl
