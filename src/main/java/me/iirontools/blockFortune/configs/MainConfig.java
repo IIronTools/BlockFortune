@@ -15,7 +15,8 @@ public class MainConfig {
     private File file;
     private YamlConfiguration config;
 
-    private int fortuneMultiplier;
+    private int fortuneMultiplierMin;
+    private int fortuneMultiplierMax;
 
     private List<String> fortuneNames;
     private List<Material> fortuneMaterials = new ArrayList<>();
@@ -38,7 +39,9 @@ public class MainConfig {
             BlockFortune.getPlugin().getLogger().severe("Niepoprawno załadowano konfigurację pluginu!");
         }
 
-        fortuneMultiplier = config.getInt("fortune-multiplier");
+        fortuneMultiplierMin = config.getInt("fortune-multiplier.min");
+        fortuneMultiplierMax = config.getInt("fortune-multiplier.max");
+
         fortuneNames = config.getStringList("fortune-blocks");
 
         for (String fortuneName : fortuneNames) {
@@ -52,24 +55,18 @@ public class MainConfig {
         }
     }
 
-//    public void save() {
-//        try {
-//            config.save(file);
-//        } catch (Exception e) {
-//            BlockFortune.getPlugin().getLogger().severe("Niepoprawnie zapisano konfigurację pluginu!");
-//        }
-//    }
-
-    public Integer getFortuneMultiplier() {
-        return fortuneMultiplier;
+    public Integer getFortuneMultiplierMin() {
+        return fortuneMultiplierMin;
     }
-    public List<Material> getFortuneMaterials() {
+    public Integer getFortuneMultiplierMax() {
+        return fortuneMultiplierMax;
+    }
+
+    public List<Material> getFortuneMaterials () {
         return fortuneMaterials;
     }
 
-    public static MainConfig getInstance() {
+    public static MainConfig getInstance () {
         return instance;
     }
-
-
 }

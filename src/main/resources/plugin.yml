@@ -1,11 +1,13 @@
 name: BlockFortune
-version: '1.0'
+version: '1.0.1'
 main: me.iirontools.blockFortune.BlockFortune
 api-version: '1.21'
 authors: [ Iirontools ]
-description: Plugin do testowania
+description: "Plugin do zarządzania dropem"
 website: dc.dotmc.pl
 commands:
   fortune:
     description: "Komendy do fortuny na bloki"
     usage: "/fortune <reload>"
+    aliases:
+      - drop

@@ -8,6 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Random;
+
 
 public class BlockBreakListener implements Listener {
 
@@ -20,7 +22,15 @@ public class BlockBreakListener implements Listener {
             event.setDropItems(false);
             Player player = event.getPlayer();
 
-            ItemStack dropItem = new ItemStack(brokenBlockType, MainConfig.getInstance().getFortuneMultiplier());
+
+            Random random = new Random();
+
+            int minFortune = MainConfig.getInstance().getFortuneMultiplierMin();
+            int maxFortune = MainConfig.getInstance().getFortuneMultiplierMax();
+
+            int quantity = random.nextInt(maxFortune - minFortune + 1) + minFortune;
+
+            ItemStack dropItem = new ItemStack(brokenBlockType, quantity);
 
             player.getInventory().addItem(dropItem);
         }
