@@ -5,15 +5,15 @@
 
 #=======================================================================================================================
 
-#JAKIE BLOKI MAJĄ BYĆ MNOŻONE
-#PEŁNA LISTA DOSTĘPNYCH BLOKÓW ZNAJDUJE SIĘ NA https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+# JAKIE BLOKI MAJĄ BYĆ MNOŻONE
+# PEŁNA LISTA DOSTĘPNYCH BLOKÓW ZNAJDUJE SIĘ NA https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
 fortune-blocks:
   - STONE
   - GRAVEL
   - SAND
 #=======================================================================================================================
 
-#MNOŻNIK WYPADANYCH PRZEDMIOTÓW
+# MNOŻNIK WYPADANYCH PRZEDMIOTÓW
 # UWAGA! NALEŻY WPISYWAĆ TYLKO LICZBY CAŁKOWITE DODATNIE
 fortune-multiplier:
   min: 1
