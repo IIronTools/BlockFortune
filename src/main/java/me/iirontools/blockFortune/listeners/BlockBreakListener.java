@@ -1,6 +1,8 @@
 package me.iirontools.blockFortune.listeners;
 
 import me.iirontools.blockFortune.configs.MainConfig;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,23 +20,25 @@ public class BlockBreakListener implements Listener {
 
         Material brokenBlockType = event.getBlock().getType();
 
-        if (MainConfig.getInstance().getFortuneMaterials().contains(brokenBlockType)) {
+        if (MainConfig.getInstance().getMaterials().contains(brokenBlockType)) {
             event.setDropItems(false);
             Player player = event.getPlayer();
-
-
+            
             Random random = new Random();
 
             int minFortune = MainConfig.getInstance().getFortuneMultiplierMin();
             int maxFortune = MainConfig.getInstance().getFortuneMultiplierMax();
 
-            int quantity = random.nextInt(maxFortune - minFortune + 1) + minFortune;
+            Material tool = event.getPlayer().getInventory().getItemInMainHand().getType();
 
-            ItemStack dropItem = new ItemStack(brokenBlockType, quantity);
+            if (MainConfig.getInstance().getTools().contains(tool)) {
+                System.out.println("debug - right tool");
 
-            player.getInventory().addItem(dropItem);
+                int quantity = random.nextInt(maxFortune - minFortune + 1) + minFortune;
+                ItemStack dropItem = new ItemStack(brokenBlockType, quantity);
+                player.getInventory().addItem(dropItem);
+
+            }
         }
-
-
     }
 }

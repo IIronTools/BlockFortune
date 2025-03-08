@@ -11,6 +11,10 @@ fortune-blocks:
   - STONE
   - GRAVEL
   - SAND
+
+fortune-tools:
+  - DIAMOND_PICKAXE
+  - IRON_PICKAXE
 #=======================================================================================================================
 
 # MNOŻNIK WYPADANYCH PRZEDMIOTÓW
