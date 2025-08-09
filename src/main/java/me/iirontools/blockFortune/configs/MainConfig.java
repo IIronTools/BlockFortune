@@ -3,7 +3,6 @@ package me.iirontools.blockFortune.configs;
 import me.iirontools.blockFortune.BlockFortune;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,70 +10,47 @@ import java.util.List;
 
 public class MainConfig {
 
-    private final static MainConfig instance = new MainConfig();
-
+    private final BlockFortune plugin;
     private File file;
     private YamlConfiguration config;
-
     private int fortuneMultiplierMin;
     private int fortuneMultiplierMax;
-
-    private List<String> materialNames;
     private final List<Material> materials = new ArrayList<>();
-
-    private List<String> toolsNames;
     private final List<Material> tools = new ArrayList<>();
 
-    private MainConfig() {
+    public MainConfig(BlockFortune plugin) {
+        this.plugin = plugin;
+        load();
     }
 
-
     public void load() {
-        file = new File(BlockFortune.getPlugin().getDataFolder(), "config.yml");
+        file = new File(plugin.getDataFolder(), "config.yml");
+        if (!file.exists()) plugin.saveResource("config.yml", false);
 
-        if (!file.exists()) {
-            BlockFortune.getPlugin().saveResource("config.yml", false);
-        }
-        config = new YamlConfiguration();
+        config = YamlConfiguration.loadConfiguration(file);
         config.options().parseComments(true);
-
-        try {
-            config.load(file);
-        } catch (Exception e) {
-            BlockFortune.getPlugin().getLogger().severe("Niepoprawno załadowano konfigurację pluginu!");
-        }
 
         fortuneMultiplierMin = config.getInt("fortune-multiplier.min");
         fortuneMultiplierMax = config.getInt("fortune-multiplier.max");
 
-        materialNames = config.getStringList("fortune-blocks");
-        toolsNames = config.getStringList("fortune-tools");
-
-        for (String fortuneName : materialNames) {
-            Material material = Material.matchMaterial(fortuneName);
-
-            if (material != null) {
-                materials.add(material);
-            } else {
-                BlockFortune.getPlugin().getLogger().warning("Niepoprawny materiał w konfiguracji: " + fortuneName);
-            }
+        for (String name : config.getStringList("fortune-blocks")) {
+            Material material = Material.matchMaterial(name);
+            if (material != null) materials.add(material);
+            else plugin.getLogger().warning("Niepoprawny materiał w konfiguracji: " + name);
         }
 
-        for (String tool : toolsNames) {
-            Material material = Material.matchMaterial(tool);
-
-            if (material != null) {
-                tools.add(material);
-            } else {
-                BlockFortune.getPlugin().getLogger().warning("Niepoprawny materiał w konfiguracji: " + tool);
-            }
+        for (String name : config.getStringList("fortune-tools")) {
+            Material material = Material.matchMaterial(name);
+            if (material != null) tools.add(material);
+            else plugin.getLogger().warning("Niepoprawny materiał w konfiguracji: " + name);
         }
     }
 
-    public Integer getFortuneMultiplierMin() {
+    public int getFortuneMultiplierMin() {
         return fortuneMultiplierMin;
     }
-    public Integer getFortuneMultiplierMax() {
+
+    public int getFortuneMultiplierMax() {
         return fortuneMultiplierMax;
     }
 
@@ -84,10 +60,5 @@ public class MainConfig {
 
     public List<Material> getTools() {
         return tools;
-    }
-
-
-    public static MainConfig getInstance () {
-        return instance;
     }
 }

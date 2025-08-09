@@ -7,25 +7,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BlockFortune extends JavaPlugin {
 
-    private static BlockFortune plugin;
+    private MainConfig mainConfig;
 
     @Override
     public void onEnable() {
-        plugin = this;
+        this.mainConfig = new MainConfig(this);
 
         getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
-        getCommand("fortune").setExecutor(new FortuneCommand());
-
-        MainConfig.getInstance().load();
-
-
+        getCommand("fortune").setExecutor(new FortuneCommand(this));
     }
 
-    @Override
-    public void onDisable() {
-    }
-
-    public static BlockFortune getPlugin() {
-        return plugin;
+    public MainConfig getMainConfig() {
+        return mainConfig;
     }
 }
