@@ -1,5 +1,6 @@
 package me.iirontools.blockFortune.listeners;
 
+import me.iirontools.blockFortune.BlockFortune;
 import me.iirontools.blockFortune.configs.MainConfig;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
@@ -15,29 +16,32 @@ import java.util.Random;
 
 public class BlockBreakListener implements Listener {
 
+    private final BlockFortune plugin;
+
+    public BlockBreakListener(BlockFortune plugin) {
+        this.plugin = plugin;
+    }
+
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
 
         Material brokenBlockType = event.getBlock().getType();
 
-        if (MainConfig.getInstance().getMaterials().contains(brokenBlockType)) {
+        if (plugin.getMainConfig().getMaterials().contains(brokenBlockType)) {
             event.setDropItems(false);
             Player player = event.getPlayer();
             
             Random random = new Random();
 
-            int minFortune = MainConfig.getInstance().getFortuneMultiplierMin();
-            int maxFortune = MainConfig.getInstance().getFortuneMultiplierMax();
+            int minFortune = plugin.getMainConfig().getFortuneMultiplierMin();
+            int maxFortune = plugin.getMainConfig().getFortuneMultiplierMax();
 
             Material tool = event.getPlayer().getInventory().getItemInMainHand().getType();
 
-            if (MainConfig.getInstance().getTools().contains(tool)) {
-                System.out.println("debug - right tool");
-
+            if (plugin.getMainConfig().getTools().contains(tool)) {
                 int quantity = random.nextInt(maxFortune - minFortune + 1) + minFortune;
                 ItemStack dropItem = new ItemStack(brokenBlockType, quantity);
                 player.getInventory().addItem(dropItem);
-
             }
         }
     }
