@@ -13,7 +13,7 @@ public final class BlockFortune extends JavaPlugin {
     public void onEnable() {
         this.mainConfig = new MainConfig(this);
 
-        getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
+        getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
         getCommand("fortune").setExecutor(new FortuneCommand(this));
     }
 
